@@ -62,28 +62,25 @@ export default function TodoList() {
   
 
 
-  const EditHandle =  async (id) => {
-    setupdateid(id)
-     
+  const EditHandle =   (id) => {
+      setupdateid(id)
   }
+  
+  const  EditClick = async (id)=>{
+    await axios.post("http://localhost:8000/updatenew" , {
+      name,
+      amount,
+      id,
+  }).then((res)=>{
+    setdetails(res.data)
+    setname("");
+    setamount("");
+  }).catch((err)=>{
+  console.log(err);
+  })
+}
 
-  const  EditClick = async (e, id)=>{
-    e.preventDefault()
-  //  useEffect(async()=>{
-    try { 
-      await axios.post("http://localhost:8000/updatenew" , {
-       name,
-       amount,
-       id,
-     }) 
-     setname("");
-     setamount("");
-
-   } catch (error) {
-     console.log(error)
-   }
-  //  },[])
-  }   
+     
  
   return (
     <>
@@ -111,7 +108,7 @@ export default function TodoList() {
         &nbsp;  &nbsp; &nbsp;
         <Button id="Editbtn" onClick={() => HandalClick()} variant="success">Save Data</Button>{' '}
         &nbsp; &nbsp;
-        <Button id="Editupdate" onClick={(e) => EditClick(e, updateid)} variant="success">Upadate Data</Button>{' '}
+        <Button id="Editupdate" onClick={() => EditClick(updateid)} variant="success">Upadate Data</Button>{' '}
       </div>
      <div><h4 style={{color: "red"}} className="text-center">{}</h4></div>
 
@@ -134,7 +131,7 @@ export default function TodoList() {
                   <Button id="Updatebtn" className="m-0" onClick={() => EditHandle(el.id)} variant="success">Edit Data</Button>{' '}
                 </td>
               </tr>
-            })}
+            })} 
           </tbody>
         </table>
       </div>
