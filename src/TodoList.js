@@ -50,7 +50,7 @@ export default function TodoList() {
 
   const DeleteHandle =  async (elid) => {
     try {
-      await axios.delete("http://localhost:8000/deleteData" , {data : {elid:elid}} )
+      await axios.delete("http://localhost:8000/deleteData" , {data : {elid:elid}}  )
     } catch (error) {
        console.log(error)
     }    
